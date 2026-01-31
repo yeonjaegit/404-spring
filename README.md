@@ -218,5 +218,63 @@ spring.jpa.hibernate.ddl-auto=update
 
 ```
 
-## ERD 구조
-- [ERD Cloud](https://www.erdcloud.com/d/rfbhh56TFNjiobguv)
+---
+
+## 🤖 AI 도구 활용 (Cursor)
+
+### Spring Scheduler Cron 표현식 생성
+**Before (잘못된 표현식)**
+```java
+@Scheduled(cron = "0 0 0 * * *")  // 00:00:00 실행 (의도와 다름)
+```
+
+**After (Cursor 제안)**
+```java
+@Scheduled(cron = "1 0 0 * * ?")  // 00:00:01 실행 (정확)
+// 초 분 시 일 월 요일
+```
+
+### WebSocket STOMP 설정 최적화
+- `setApplicationDestinationPrefixes` vs `enableSimpleBroker` 차이 자동 설명
+- CORS 설정 오류 해결 (`setAllowedOriginPatterns("*")` 제안)
+
+### @Transactional 적용 범위 개선
+- Cursor가 읽기 전용 쿼리에 `readOnly = true` 추가 제안
+- 트랜잭션 범위 최소화 가이드
+
+---
+
+## 💡 배운 점 및 개선 과제
+
+### 배운 점
+- **Spring Scheduler**: Cron 표현식 기반 자동화 배치 작업 구현
+- **@Transactional**: JPA 트랜잭션 관리 및 데이터 일관성 보장
+- **WebSocket (STOMP)**: Pub/Sub 패턴으로 실시간 알림 구현
+- **Dirty Checking**: JPA 변경 감지로 명시적 UPDATE 없이 DB 동기화
+- **Spring Data JPA**: 메서드 네이밍 컨벤션으로 자동 쿼리 생성
+
+### 향후 개선 과제
+- **인증/인가**: Spring Security 적용 및 JWT 통합
+- **급여 계산 고도화**: 추가 수당, 야간 근무 수당 등 복잡한 정책 반영
+- **월간 통계 최적화**: 쿼리 성능 개선 및 인덱싱
+- **WebSocket 확장성**: Redis Pub/Sub으로 멀티 인스턴스 환경 대응
+- **테스트 코드**: JUnit5로 Scheduler 및 WebSocket 테스트 작성
+
+---
+
+## 🔗 관련 링크
+
+- **404-back (Flask)**: [GitHub 🔗](https://github.com/yeonjaegit/404-back) - MQTT 센서 수집 백엔드
+- **ERD 설계**: [ERD Cloud](https://www.erdcloud.com/d/rfbhh56TFNjiobguv)
+- **노션 포트폴리오**: [상세 프로젝트 문서](https://www.notion.so/Project-3-2ef62d7f696c80a0926ddc560281b2f2)
+- **시연 영상**: [YouTube](https://www.youtube.com/watch?v=gPBmVkVSfhc)
+
+---
+
+**Last Updated**: 2026-01-31
+
+<br/>
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
